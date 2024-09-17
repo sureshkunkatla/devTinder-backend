@@ -2,16 +2,23 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("I am dashboard");
+const { adminAuth, userAuth } = require("./middlewares/auth");
+
+app.use("/admin", adminAuth);
+
+app.get("/admin/getAllDetails", (req, res) => {
+  res.send("All details sent");
 });
 
-app.get("/test", (req, res) => {
-  res.send("I am test");
+app.get("/user/getAllUsers", userAuth, (req, res) => {
+  throw new Error("Some is wrong");
+  res.send("All Users details sent");
 });
 
-app.get("/hello", (req, res) => {
-  res.send("I am Hello");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Something went wrong");
+  }
 });
 
 app.listen(3000, () => {
