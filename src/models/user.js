@@ -6,21 +6,21 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema(
   {
     firstName: {
-      type: "String",
+      type: String,
       required: [true, " First Name is required"],
       minLength: 3,
       maxLength: 20,
       trim: true,
     },
     lastName: {
-      type: "String",
+      type: String,
       required: [true, "Last Name is required"],
       minLength: 3,
       maxLength: 20,
       trim: true,
     },
     emailId: {
-      type: "String",
+      type: String,
       required: [true, "Last Name is required"],
       unique: [true, "Already a user exists with this email"],
       lowercase: true,
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
       },
     },
     password: {
-      type: "String",
+      type: String,
       required: [true, "Password is required"],
       minlength: [8, "Password must be at least 8 characters long"],
       validate: {
@@ -44,12 +44,12 @@ const userSchema = new mongoose.Schema(
       },
     },
     age: {
-      type: "Number",
+      type: Number,
       required: [true, "Password is required"],
       min: [18, "Age should be at least 18"],
     },
     gender: {
-      type: "String",
+      type: String,
       required: [true, "Gender is required"],
       enum: {
         values: ["Male", "Female", "Other"],
@@ -57,13 +57,21 @@ const userSchema = new mongoose.Schema(
       },
     },
     profileURL: {
-      type: "String",
+      type: String,
       default: "https://cdn-icons-png.flaticon.com/512/21/21104.png",
       validate: {
         validator: function (value) {
           return validator.isURL(value);
         },
       },
+    },
+    about: {
+      type: String,
+      default: "This is default about please update your details here",
+    },
+    skills: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }
