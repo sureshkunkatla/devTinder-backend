@@ -6,13 +6,4 @@ const connectToDB = async () => {
   );
 };
 
-// const db = connectToDB()
-//   .then(() => {
-//     console.log("Connection to database is successful");
-//   })
-//   .catch((e) => {
-//     console.log("unable to connect the database");
-//     console.log(e);
-//   });
-
 module.exports = { connectToDB };
