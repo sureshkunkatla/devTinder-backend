@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const profileRouter = express();
 
-profileRouter.get("/profile/view", userAuth, async (req, res) => {
+profileRouter.get("/view", userAuth, async (req, res) => {
   try {
     res.status(200).json({
       data: req.user,
@@ -15,7 +15,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
+profileRouter.patch("/edit", userAuth, async (req, res) => {
   try {
     if (!userProfileUpdateValidation(req.body)) {
       throw new Error("Some of the fields are new or not editable");
@@ -35,7 +35,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/updatePassword", userAuth, async (req, res) => {
+profileRouter.patch("/updatePassword", userAuth, async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
     const user = req.user;
